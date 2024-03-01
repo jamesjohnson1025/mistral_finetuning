@@ -20,3 +20,6 @@ first_example = raw_datasets['train'][0]
 # load the messages 
 messages = first_example['messages']
 # messages is the list of dictionary 
+
+# The length of raw dataset 
+print(len(raw_datasets['train']))
