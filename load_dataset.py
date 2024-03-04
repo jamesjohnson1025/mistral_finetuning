@@ -5,7 +5,7 @@ from datasets import DatasetDict
 # load the ultrachat dataset 
 ultra_dataset = load_dataset("HuggingFaceH4/ultrachat_200k")
 
-indices = range(0,100)
+indices = range(0,10)
 
 dataset_dict = {
         'train':ultra_dataset['train_sft'].select(indices=indices),
