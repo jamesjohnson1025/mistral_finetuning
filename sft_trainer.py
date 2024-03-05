@@ -3,10 +3,11 @@ from peft import LoraConfig
 from transformers import TrainingArguments
 from load_tokenizer import *
 from model_arguments import *
-from apply_chat_template import *
+from apply_chat_template import get_ultra_dataset
 
 output_dir = 'data/zephyr-7b-sft-lora'
 
+train_dataset,test_dataset = get_ultra_dataset()
 
 training_args = TrainingArguments(
     fp16=True,

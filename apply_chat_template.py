@@ -7,7 +7,7 @@ import os
 import torch
 
 
-def apply_chat_template(example,tokenizer):
+def apply_chat_template_to_ultra(example,tokenizer):
     messages = example['messages']
     if messages[0]['role'] != 'system':
         messages.insert(0,{'role':'system','content':''})
@@ -15,13 +15,15 @@ def apply_chat_template(example,tokenizer):
     return example
 
 
-column_names = list(raw_datasets['train'].features)
-raw_datasets = raw_datasets.map(apply_chat_template,
-                                num_proc=os.cpu_count(),
-                                fn_kwargs={'tokenizer':tokenizer},
-                                remove_columns=column_names,
-                                desc='Applying chat template'
-                            )
+def get_ultra_dataset():
+    column_names = list(raw_datasets['train'].features)
+    raw_datasets = raw_datasets.map(apply_chat_template_to_ultra,
+                                    num_proc=os.cpu_count(),
+                                    fn_kwargs={'tokenizer':tokenizer},
+                                    remove_columns=column_names,
+                                    desc='Applying chat template'
+                                )
 
-train_dataset = raw_datasets['train']
-test_dataset = raw_datasets['test']
+    train_dataset = raw_datasets['train']
+    test_dataset = raw_datasets['test']
+    return train_dataset,test_dataset
